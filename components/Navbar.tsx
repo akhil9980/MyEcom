@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ShoppingBag, Search, User, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import logo from '../assets/oncyTech-removebg-preview.png';
 
 const Navbar: React.FC = () => {
   const { totalItems } = useCart();
@@ -24,8 +25,8 @@ const Navbar: React.FC = () => {
 
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="text-2xl font-serif font-bold tracking-[0.2em] text-slate-900">
-              MyEcom
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="OncyTech" className="h-10 sm:h-12 w-auto" />
             </Link>
           </div>
 
