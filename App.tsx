@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
 import Checkout from "./pages/Checkout";
+import Profile from "./pages/Profile";
 import { CartProvider } from "./context/CartContext";
 
 const Footer: React.FC = () => (
@@ -171,6 +172,18 @@ const App: React.FC = () => {
                 <Navbar />
                 <main className="flex-grow">
                   <Checkout />
+                </main>
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <div className="min-h-screen flex flex-col">
+                <Navbar />
+                <main className="flex-grow">
+                  <Profile />
                 </main>
                 <Footer />
               </div>

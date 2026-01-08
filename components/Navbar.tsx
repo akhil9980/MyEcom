@@ -3,11 +3,13 @@ import { ShoppingBag, Search, User, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../context/CartContext";
+import SearchModal from "./SearchModal";
 
 const Navbar: React.FC = () => {
   const { totalItems } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
 
   // Detect scroll for navbar style changes
@@ -115,11 +117,14 @@ const Navbar: React.FC = () => {
             <IconButton
               icon={<Search size={20} strokeWidth={1.5} />}
               label="Search"
+              onClick={() => setIsSearchOpen(true)}
             />
-            <IconButton
-              icon={<User size={20} strokeWidth={1.5} />}
-              label="Account"
-            />
+            <Link to="/profile">
+              <IconButton
+                icon={<User size={20} strokeWidth={1.5} />}
+                label="Account"
+              />
+            </Link>
             <Link to="/checkout" className="relative group" data-cursor-hover>
               <motion.div
                 whileHover={{ scale: 1.1 }}
@@ -176,6 +181,12 @@ const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
     </motion.nav>
   );
 };
@@ -211,14 +222,16 @@ const NavLink: React.FC<{ to: string; label: string }> = ({ to, label }) => {
 };
 
 // Icon button with ripple effect
-const IconButton: React.FC<{ icon: React.ReactNode; label: string }> = ({
-  icon,
-  label,
-}) => {
+const IconButton: React.FC<{
+  icon: React.ReactNode;
+  label: string;
+  onClick?: () => void;
+}> = ({ icon, label, onClick }) => {
   return (
     <motion.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
+      onClick={onClick}
       className="hidden sm:block p-2 text-zinc-600 hover:text-black transition-colors relative overflow-hidden group"
       aria-label={label}
       data-cursor-hover
