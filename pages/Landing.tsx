@@ -1,6 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Play, ArrowRight, Phone, Mail, MapPin, Instagram, Facebook, Twitter } from "lucide-react";
+import {
+  Play,
+  ArrowRight,
+  Phone,
+  Mail,
+  MapPin,
+  Instagram,
+  Facebook,
+  Twitter,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const Landing: React.FC = () => {
@@ -8,26 +17,25 @@ const Landing: React.FC = () => {
     <div className="bg-black min-h-screen flex flex-col relative overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-900 opacity-50" />
-      
+
       {/* Top Navigation Bar */}
-      <motion.nav 
+      <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-50 flex justify-between items-center px-6 lg:px-24 py-6 border-b border-white/10"
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-            <span className="text-black font-bold text-sm">OT</span>
-          </div>
           <div>
             <h2 className="text-white text-xl font-serif font-bold tracking-[0.15em]">
               ONCY TECH
             </h2>
-            <p className="text-white/60 text-xs tracking-wider">Premium Fashion</p>
+            <p className="text-white/60 text-xs tracking-wider">
+              Premium Fashion
+            </p>
           </div>
         </div>
-        
+
         <motion.a
           href="tel:9599663171"
           whileHover={{ scale: 1.05 }}
@@ -42,7 +50,7 @@ const Landing: React.FC = () => {
       <div className="relative mx-auto py-20 w-full">
         <div className="relative isolate overflow-hidden px-6 pt-16 sm:px-16 md:pt-24 lg:grid lg:grid-cols-2 lg:gap-x-10 lg:px-24 lg:pt-0">
           {/* Left Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -50,7 +58,7 @@ const Landing: React.FC = () => {
           >
             <div>
               <div>
-                <motion.span 
+                <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
@@ -70,7 +78,10 @@ const Landing: React.FC = () => {
                 </p>
               </div>
               <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start cursor-pointer">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Link
                     to="/home"
                     className="bg-white text-black font-bold rounded-full px-8 py-4 text-sm tracking-wider shadow-lg hover:shadow-xl hover:bg-gray-100 transition-all"
@@ -90,7 +101,7 @@ const Landing: React.FC = () => {
               </div>
               <div>
                 <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-2">
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 }}
@@ -103,7 +114,7 @@ const Landing: React.FC = () => {
                       300+
                     </dd>
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
@@ -190,7 +201,7 @@ const Landing: React.FC = () => {
       </div>
 
       {/* Promo Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 1 }}
@@ -198,7 +209,7 @@ const Landing: React.FC = () => {
       >
         <div className="pb-32 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-32">
           <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
@@ -215,20 +226,29 @@ const Landing: React.FC = () => {
                 where we encourage you to break free from the ordinary and
                 embrace your own unique fashion journey
               </p>
-              
+
               {/* Contact Information */}
               <div className="space-y-4 border-t border-white/10 pt-6 mt-8">
                 <div className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
                   <Phone size={18} />
-                  <a href="tel:9599663171" className="text-sm tracking-wide">+91 9599663171</a>
+                  <a href="tel:9599663171" className="text-sm tracking-wide">
+                    +91 9599663171
+                  </a>
                 </div>
                 <div className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
                   <Mail size={18} />
-                  <a href="mailto:contact@oncytech.com" className="text-sm tracking-wide">contact@oncytech.com</a>
+                  <a
+                    href="mailto:contact@oncytech.com"
+                    className="text-sm tracking-wide"
+                  >
+                    contact@oncytech.com
+                  </a>
                 </div>
                 <div className="flex items-center gap-3 text-white/70">
                   <MapPin size={18} />
-                  <span className="text-sm tracking-wide">New Delhi, India</span>
+                  <span className="text-sm tracking-wide">
+                    New Delhi, India
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -313,8 +333,13 @@ const Landing: React.FC = () => {
                     to="/home"
                     className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-8 py-4 text-white font-medium hover:bg-white hover:text-black transition-all duration-500"
                   >
-                    <span className="text-sm tracking-[0.2em] uppercase">Enter Store</span>
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    <span className="text-sm tracking-[0.2em] uppercase">
+                      Enter Store
+                    </span>
+                    <ArrowRight
+                      size={18}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
                   </Link>
                 </motion.div>
               </div>
@@ -337,11 +362,14 @@ const Landing: React.FC = () => {
                   <h3 className="text-white text-2xl font-serif font-bold tracking-[0.15em]">
                     ONCY TECH
                   </h3>
-                  <p className="text-white/50 text-xs tracking-wider">Premium Fashion</p>
+                  <p className="text-white/50 text-xs tracking-wider">
+                    Premium Fashion
+                  </p>
                 </div>
               </div>
               <p className="text-white/60 text-sm leading-relaxed">
-                Elevating everyday aesthetics through premium materials and timeless design.
+                Elevating everyday aesthetics through premium materials and
+                timeless design.
               </p>
             </div>
 
@@ -352,22 +380,34 @@ const Landing: React.FC = () => {
               </h4>
               <ul className="space-y-3">
                 <li>
-                  <Link to="/home" className="text-white/60 hover:text-white text-sm transition-colors">
+                  <Link
+                    to="/home"
+                    className="text-white/60 hover:text-white text-sm transition-colors"
+                  >
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/shop" className="text-white/60 hover:text-white text-sm transition-colors">
+                  <Link
+                    to="/shop"
+                    className="text-white/60 hover:text-white text-sm transition-colors"
+                  >
                     Shop
                   </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">
+                  <a
+                    href="#"
+                    className="text-white/60 hover:text-white text-sm transition-colors"
+                  >
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="tel:9599663171" className="text-white/60 hover:text-white text-sm transition-colors">
+                  <a
+                    href="tel:9599663171"
+                    className="text-white/60 hover:text-white text-sm transition-colors"
+                  >
                     Contact
                   </a>
                 </li>
@@ -380,8 +420,8 @@ const Landing: React.FC = () => {
                 Get In Touch
               </h4>
               <div className="space-y-4">
-                <a 
-                  href="tel:9599663171" 
+                <a
+                  href="tel:9599663171"
                   className="flex items-center gap-3 text-white/60 hover:text-white transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
@@ -389,8 +429,8 @@ const Landing: React.FC = () => {
                   </div>
                   <span className="text-sm">+91 9599663171</span>
                 </a>
-                <a 
-                  href="mailto:contact@oncytech.com" 
+                <a
+                  href="mailto:contact@oncytech.com"
                   className="flex items-center gap-3 text-white/60 hover:text-white transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
@@ -398,16 +438,25 @@ const Landing: React.FC = () => {
                   </div>
                   <span className="text-sm">contact@oncytech.com</span>
                 </a>
-                
+
                 {/* Social Links */}
                 <div className="flex gap-3 pt-4">
-                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <a
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  >
                     <Instagram size={16} className="text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <a
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  >
                     <Facebook size={16} className="text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <a
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  >
                     <Twitter size={16} className="text-white" />
                   </a>
                 </div>
@@ -421,10 +470,16 @@ const Landing: React.FC = () => {
               © 2026 ONCY TECH. All Rights Reserved.
             </p>
             <div className="flex gap-6 text-xs">
-              <a href="#" className="text-white/40 hover:text-white transition-colors">
+              <a
+                href="#"
+                className="text-white/40 hover:text-white transition-colors"
+              >
                 Privacy Policy
               </a>
-              <a href="#" className="text-white/40 hover:text-white transition-colors">
+              <a
+                href="#"
+                className="text-white/40 hover:text-white transition-colors"
+              >
                 Terms of Service
               </a>
             </div>
