@@ -109,7 +109,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           />
 
           {/* Badge animations */}
-          {product.isNew && (
+          {product.isNew && !product.originalPrice && (
             <motion.span
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -120,14 +120,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </motion.span>
           )}
           {product.originalPrice && (
-            <motion.span
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="absolute top-4 right-4 bg-black text-white px-3 py-1.5 text-[9px] font-bold tracking-[0.25em] uppercase"
-            >
-              SALE
-            </motion.span>
+            <>
+              <motion.span
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1.5 text-[10px] font-bold tracking-[0.2em] uppercase"
+              >
+                {Math.round(
+                  ((product.originalPrice - product.price) /
+                    product.originalPrice) *
+                    100
+                )}
+                % OFF
+              </motion.span>
+            </>
           )}
         </Link>
 

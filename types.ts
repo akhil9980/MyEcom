@@ -6,6 +6,8 @@ export interface Product {
   price: number;
   originalPrice?: number;
   category: string;
+  subcategory?: string;
+  gender?: string;
   images: string[];
   colors: { name: string; hex: string; imageUrl: string }[];
   sizes: string[];
@@ -13,6 +15,19 @@ export interface Product {
   rating: number;
   reviewsCount: number;
   isNew?: boolean;
+  inStock?: boolean;
+}
+
+export interface FilterOptions {
+  categories: string[];
+  subcategories: string[];
+  brands: string[];
+  priceRange: { min: number; max: number };
+  sizes: string[];
+  colors: string[];
+  rating: number;
+  inStock: boolean;
+  discount: boolean;
 }
 
 export interface CartItem {

@@ -6,10 +6,13 @@ import CinematicHero from "../components/CinematicHero";
 import ScrollStory from "../components/ScrollStory";
 import ProductCard from "../components/ProductCard";
 import CustomCursor from "../components/CustomCursor";
-import { PRODUCTS } from "../constants";
+import { PRODUCTS } from "../data/products";
 
 const Home: React.FC = () => {
-  const featuredProducts = PRODUCTS.slice(0, 4);
+  // Show featured products - mix of new and sale items
+  const featuredProducts = PRODUCTS.filter((p) => p.isNew || p.originalPrice).slice(0, 8);
+  const newArrivals = PRODUCTS.filter((p) => p.isNew).slice(0, 4);
+  const onSale = PRODUCTS.filter((p) => p.originalPrice).slice(0, 4);
 
   // Smooth scroll behavior
   useEffect(() => {
@@ -101,6 +104,148 @@ const Home: React.FC = () => {
           </div>
         </section>
 
+        {/* New Arrivals Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 bg-zinc-50">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row justify-between items-end mb-16"
+          >
+            <div>
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-400 block mb-3"
+              >
+                Just Landed
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-5xl md:text-6xl font-serif text-zinc-900 leading-tight"
+              >
+                New Arrivals
+              </motion.h2>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Link
+                to="/shop?cat=All"
+                className="group flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase hover:gap-4 transition-all duration-300 mt-6 md:mt-0"
+                data-cursor-hover
+              >
+                <span className="relative">
+                  Shop New
+                  <motion.span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-zinc-900 group-hover:w-full transition-all duration-500" />
+                </span>
+                <ArrowRight
+                  size={16}
+                  className="transform group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+            {newArrivals.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.1,
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                viewport={{ once: true }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* On Sale Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row justify-between items-end mb-16"
+          >
+            <div>
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-[10px] font-bold tracking-[0.3em] uppercase text-red-600 block mb-3"
+              >
+                Limited Time
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-5xl md:text-6xl font-serif text-zinc-900 leading-tight"
+              >
+                On Sale Now
+              </motion.h2>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Link
+                to="/shop?cat=All"
+                className="group flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase hover:gap-4 transition-all duration-300 mt-6 md:mt-0"
+                data-cursor-hover
+              >
+                <span className="relative">
+                  Shop Sale
+                  <motion.span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-zinc-900 group-hover:w-full transition-all duration-500" />
+                </span>
+                <ArrowRight
+                  size={16}
+                  className="transform group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+            {onSale.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.1,
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                viewport={{ once: true }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
         {/* Campaign Section */}
         <section className="bg-zinc-50 py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -135,16 +280,16 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="order-1 lg:order-2 space-y-8"
               >
-                <motion.span
+                <motion.p
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                   viewport={{ once: true }}
                   className="text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-400"
                 >
-                  ONCY TECH Originals
-                </motion.span>
-                <motion.h3
+                  SnappBuy Originals
+                </motion.p>
+                <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
@@ -154,7 +299,7 @@ const Home: React.FC = () => {
                   Where comfort
                   <br />
                   meets <span className="italic text-zinc-700">luxury</span>
-                </motion.h3>
+                </motion.h2>
                 <motion.p
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -218,8 +363,8 @@ const Home: React.FC = () => {
                 transition={{ delay: 0.3, duration: 0.6 }}
                 viewport={{ once: true }}
                 className="text-4xl md:text-5xl font-serif mb-6"
-              >
-                Join the ONCY TECH Circle
+                >
+                Join the SnappBuy Circle
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0 }}

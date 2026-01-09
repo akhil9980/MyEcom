@@ -77,25 +77,16 @@ const Navbar: React.FC = () => {
 
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/home" className="group" data-cursor-hover>
+            <Link to="/" className="group" data-cursor-hover>
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="text-2xl font-serif font-bold tracking-[0.2em] text-zinc-900">
-                  ONCY
-                  <motion.span
-                    className="inline-block"
-                    animate={{ rotate: [0, 5, 0] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 3,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    TECH
-                  </motion.span>
-                </span>
+                <img 
+                  src="/assets/Group 342.png" 
+                  alt="SnappBuy" 
+                  className="h-8 sm:h-10 w-auto"
+                />
               </motion.div>
             </Link>
           </div>

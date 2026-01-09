@@ -2,7 +2,6 @@ import React from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import PageLoader from "./components/PageLoader";
-import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ProductDetails from "./pages/ProductDetails";
@@ -16,7 +15,7 @@ const Footer: React.FC = () => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         <div className="space-y-6">
           <h3 className="text-white text-xl font-serif font-bold tracking-widest">
-            ONCY TECH
+            SNAPPBUY
           </h3>
           <p className="text-sm font-light leading-relaxed">
             Elevating everyday aesthetics through premium materials and timeless
@@ -107,7 +106,7 @@ const Footer: React.FC = () => (
       </div>
       <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-[10px] font-bold tracking-widest uppercase">
-          © 2024 MyEcom. All Rights Reserved.
+          © 2024 SnappBuy. All Rights Reserved.
         </p>
         <div className="flex space-x-6 text-[10px] font-bold tracking-widest uppercase">
           <a href="#" className="hover:text-white transition-colors">
@@ -128,9 +127,8 @@ const App: React.FC = () => {
       <PageLoader />
       <Router>
         <Routes>
-          <Route path="/" element={<Landing />} />
           <Route
-            path="/home"
+            path="/"
             element={
               <div className="min-h-screen flex flex-col">
                 <Navbar />

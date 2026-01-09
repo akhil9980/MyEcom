@@ -40,7 +40,7 @@ const PageLoader: React.FC = () => {
                 ease: "easeInOut",
               }}
             >
-              ONCY TECH
+              SNAPPBUY
             </motion.h1>
 
             {/* Loading bar */}

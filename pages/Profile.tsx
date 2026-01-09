@@ -17,8 +17,8 @@ import { useCart } from "../context/CartContext";
 const Profile: React.FC = () => {
   const { cart } = useCart();
   const [user] = useState({
-    name: "Oncy Tech",
-    email: "oncytech@gmail.com",
+    name: "SnappBuy User",
+    email: "user@snappbuy.com",
     phone: "+91 9599663171",
     address: "New Delhi, India",
     memberSince: "January 2026",

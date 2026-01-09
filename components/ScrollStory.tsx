@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
+import { PRODUCTS } from "../data/products";
 
 const ScrollStory: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -8,48 +10,16 @@ const ScrollStory: React.FC = () => {
     offset: ["start end", "end start"],
   });
 
-  // Stories data
-  const stories = [
-    {
-      id: 1,
-      title: "Effortless Elegance",
-      subtitle: "Spring Essentials",
-      description:
-        "Discover pieces that blend timeless sophistication with contemporary edge. Our Spring collection celebrates the art of understated luxury.",
-      image:
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=1400",
-    },
-    {
-      id: 2,
-      title: "Urban Nomad",
-      subtitle: "City Movement",
-      description:
-        "For those who navigate the concrete jungle with confidence. Functional designs that never compromise on style.",
-      image:
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1400",
-    },
-    {
-      id: 3,
-      title: "Rebel Spirit",
-      subtitle: "Statement Pieces",
-      description:
-        "Bold silhouettes for those who refuse to blend in. Fashion is your voice—make it loud.",
-      image:
-        "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&q=80&w=1400",
-    },
-    {
-      id: 4,
-      title: "Minimalist Poetry",
-      subtitle: "Clean Lines",
-      description:
-        "Less is more, but never boring. Precision-cut pieces that speak volumes through silence.",
-      image:
-        "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&q=80&w=1400",
-    },
-  ];
+  // Get products with discounts for offers
+  const offerProducts = PRODUCTS.filter(
+    (p) => p.originalPrice && p.originalPrice > p.price
+  ).slice(0, 4);
 
   return (
-    <section ref={containerRef} className="relative bg-black text-white py-32">
+    <section
+      ref={containerRef}
+      className="relative bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-500 text-zinc-900 py-32"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Sticky Left Text Column */}
@@ -60,27 +30,79 @@ const ScrollStory: React.FC = () => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
             >
-              <span className="text-white/50 text-xs tracking-[0.3em] uppercase mb-4 block">
-                The Collection
+              <span className="text-zinc-900/70 text-xs tracking-[0.3em] uppercase mb-4 block font-bold">
+                Limited Time Offers
               </span>
               <h2 className="text-5xl md:text-7xl font-serif mb-8 leading-[0.95]">
                 Designed for
                 <br />
-                <span className="italic text-white/80">those who</span>
+                <span className="italic text-zinc-800">those who</span>
                 <br />
                 dare to define
               </h2>
-              <p className="text-white/70 text-lg font-light leading-relaxed max-w-md">
-                Each piece tells a story. Scroll through our curated narratives
-                and find the chapter that resonates with your soul.
+              <p className="text-zinc-800 text-lg font-light leading-relaxed max-w-md mb-8">
+                Each piece tells a story. Discover exclusive deals on our
+                curated collection.
               </p>
+
+              {/* Offers List */}
+              <div className="space-y-4 mb-8">
+                {offerProducts.map((product, idx) => {
+                  const discount = Math.round(
+                    ((product.originalPrice! - product.price) /
+                      product.originalPrice!) *
+                      100
+                  );
+                  return (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-center gap-3 group"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-zinc-900 text-yellow-400 flex items-center justify-center text-xs font-bold">
+                        {discount}%
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-sm">{product.name}</p>
+                        <p className="text-xs text-zinc-700">
+                          <span className="line-through">
+                            ${product.originalPrice}
+                          </span>
+                          <span className="ml-2 font-bold">
+                            ${product.price}
+                          </span>
+                        </p>
+                      </div>
+                      <motion.div
+                        className="w-2 h-2 rounded-full bg-zinc-900"
+                        animate={{ scale: [1, 1.5, 1] }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 2,
+                          delay: idx * 0.2,
+                        }}
+                      />
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <Link
+                to="/shop"
+                className="inline-block bg-zinc-900 text-yellow-400 px-8 py-4 text-sm font-bold tracking-wider uppercase hover:bg-zinc-800 transition-colors"
+              >
+                Shop All Offers
+              </Link>
             </motion.div>
           </div>
 
-          {/* Scrolling Right Image + Text Column */}
-          <div className="space-y-32">
-            {stories.map((story, index) => (
-              <StoryCard key={story.id} story={story} index={index} />
+          {/* Scrolling Right Products Column */}
+          <div className="space-y-8">
+            {offerProducts.map((product, index) => (
+              <ProductCard key={product.id} product={product} index={index} />
             ))}
           </div>
         </div>
@@ -89,9 +111,9 @@ const ScrollStory: React.FC = () => {
   );
 };
 
-// Individual story card with scroll reveal
-const StoryCard: React.FC<{ story: any; index: number }> = ({
-  story,
+// Individual product card with scroll reveal
+const ProductCard: React.FC<{ product: any; index: number }> = ({
+  product,
   index,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -100,9 +122,10 @@ const StoryCard: React.FC<{ story: any; index: number }> = ({
     offset: ["start end", "end start"],
   });
 
-  // Parallax image movement
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 0.95]);
+  const discount = Math.round(
+    ((product.originalPrice - product.price) / product.originalPrice) * 100
+  );
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   return (
     <motion.div
@@ -114,98 +137,64 @@ const StoryCard: React.FC<{ story: any; index: number }> = ({
         delay: index * 0.1,
         ease: [0.22, 1, 0.36, 1],
       }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-50px" }}
       className="group"
     >
-      {/* Image Container with Parallax */}
-      <div className="relative overflow-hidden rounded-sm mb-8 aspect-[3/4] bg-zinc-900">
-        <motion.div
-          style={{ y: imageY, scale: imageScale }}
-          className="w-full h-full"
-        >
-          <motion.img
-            src={story.image}
-            alt={story.title}
-            className="w-full h-full object-cover"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          />
-        </motion.div>
+      <Link to={`/product/${product.id}`}>
+        {/* Image Container with Parallax */}
+        <div className="relative overflow-hidden rounded-lg mb-6 aspect-[4/5] bg-white shadow-2xl">
+          <motion.div style={{ y: imageY }} className="w-full h-full">
+            <motion.img
+              src={product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-cover"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </motion.div>
 
-        {/* Hover overlay */}
-        <motion.div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-        {/* Floating number indicator */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5 }}
-          className="absolute top-6 right-6 w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center"
-        >
-          <span className="text-white text-xl font-light">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-        </motion.div>
-      </div>
-
-      {/* Text Content */}
-      <div className="space-y-3">
-        <motion.span
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-white/50 text-xs tracking-[0.3em] uppercase"
-        >
-          {story.subtitle}
-        </motion.span>
-
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-4xl font-serif group-hover:text-white/80 transition-colors duration-300"
-        >
-          {story.title}
-        </motion.h3>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-white/60 text-base font-light leading-relaxed"
-        >
-          {story.description}
-        </motion.p>
-
-        {/* Animated underline link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="pt-4"
-        >
-          <a
-            href="/shop"
-            className="group/link inline-flex items-center gap-2 text-sm tracking-[0.2em] uppercase"
-            data-cursor-hover
+          {/* Discount Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="absolute top-4 left-4 bg-zinc-900 text-yellow-400 px-4 py-2 rounded-full shadow-lg"
           >
-            <span className="relative">
-              Explore
-              <motion.span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white group-hover/link:w-full transition-all duration-500" />
+            <span className="text-lg font-bold">{discount}% OFF</span>
+          </motion.div>
+
+          {/* Hover overlay */}
+          <motion.div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+          {/* Shop Now on hover */}
+          <motion.div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="bg-yellow-400 text-zinc-900 px-6 py-3 text-sm font-bold tracking-wider uppercase shadow-xl">
+              Shop Now
             </span>
-            <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 1.5,
-                ease: "easeInOut",
-              }}
-            >
-              →
-            </motion.span>
-          </a>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
+
+        {/* Product Info */}
+        <div className="space-y-2">
+          <p className="text-xs tracking-[0.2em] uppercase text-zinc-800 font-bold">
+            {product.brand}
+          </p>
+          <h3 className="text-2xl font-serif text-zinc-900 group-hover:text-zinc-700 transition-colors">
+            {product.name}
+          </h3>
+          <div className="flex items-center gap-3">
+            <span className="text-xl font-bold text-zinc-900">
+              ${product.price}
+            </span>
+            <span className="text-lg line-through text-zinc-600">
+              ${product.originalPrice}
+            </span>
+            <span className="text-sm font-bold text-red-600">
+              Save ${product.originalPrice - product.price}
+            </span>
+          </div>
+        </div>
+      </Link>
     </motion.div>
   );
 };
