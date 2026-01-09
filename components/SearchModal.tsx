@@ -159,7 +159,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                     </div>
                   ) : (
                     <div className="p-12 text-center">
-                      <p className="text-zinc-500 font-medium">No products found</p>
+                      <p className="text-zinc-500 font-medium">
+                        No products found
+                      </p>
                       <p className="text-sm text-zinc-400 mt-2">
                         Try searching with different keywords
                       </p>
@@ -171,7 +173,9 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                       size={48}
                       className="mx-auto text-zinc-300 mb-4"
                     />
-                    <p className="text-zinc-500 font-medium">Start typing to search</p>
+                    <p className="text-zinc-500 font-medium">
+                      Start typing to search
+                    </p>
                     <p className="text-sm text-zinc-400 mt-2">
                       Search for products, brands, or categories
                     </p>

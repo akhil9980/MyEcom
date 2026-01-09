@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../context/CartContext";
 import SearchModal from "./SearchModal";
+import logoImage from "../assets/logo.png";
 
 const Navbar: React.FC = () => {
   const { totalItems } = useCart();
@@ -82,9 +83,9 @@ const Navbar: React.FC = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
-                <img 
-                  src="/assets/Group 342.png" 
-                  alt="SnappBuy" 
+                <img
+                  src={logoImage}
+                  alt="SnappBuy"
                   className="h-8 sm:h-10 w-auto"
                 />
               </motion.div>

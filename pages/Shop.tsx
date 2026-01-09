@@ -5,7 +5,13 @@ import { Filter, ChevronDown, X, SlidersHorizontal } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import FilterSidebar from "../components/FilterSidebar";
 import CustomCursor from "../components/CustomCursor";
-import { PRODUCTS, CATEGORIES, SUBCATEGORIES, BRANDS, PRICE_RANGES } from "../data/products";
+import {
+  PRODUCTS,
+  CATEGORIES,
+  SUBCATEGORIES,
+  BRANDS,
+  PRICE_RANGES,
+} from "../data/products";
 import { FilterOptions } from "../types";
 
 const Shop: React.FC = () => {
@@ -48,13 +54,22 @@ const Shop: React.FC = () => {
   const filteredProducts = useMemo(() => {
     let products = PRODUCTS.filter((product) => {
       // Category filter
-      if (filters.categories.length > 0 && !filters.categories.includes("All")) {
+      if (
+        filters.categories.length > 0 &&
+        !filters.categories.includes("All")
+      ) {
         if (!filters.categories.includes(product.category)) return false;
       }
 
       // Subcategory filter
-      if (filters.subcategories.length > 0 && !filters.subcategories.includes("All")) {
-        if (!product.subcategory || !filters.subcategories.includes(product.subcategory)) {
+      if (
+        filters.subcategories.length > 0 &&
+        !filters.subcategories.includes("All")
+      ) {
+        if (
+          !product.subcategory ||
+          !filters.subcategories.includes(product.subcategory)
+        ) {
           return false;
         }
       }
@@ -267,17 +282,20 @@ const Shop: React.FC = () => {
                   <ChevronDown size={14} />
                 </button>
                 <div className="absolute top-full right-0 mt-2 w-56 bg-white shadow-xl border border-slate-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
-                  {["Newest", "Price: Low to High", "Price: High to Low", "Top Rated"].map(
-                    (opt) => (
-                      <button
-                        key={opt}
-                        className="w-full text-left px-4 py-2.5 text-xs font-medium tracking-wide hover:bg-zinc-50 transition-colors"
-                        onClick={() => setSortBy(opt)}
-                      >
-                        {opt}
-                      </button>
-                    )
-                  )}
+                  {[
+                    "Newest",
+                    "Price: Low to High",
+                    "Price: High to Low",
+                    "Top Rated",
+                  ].map((opt) => (
+                    <button
+                      key={opt}
+                      className="w-full text-left px-4 py-2.5 text-xs font-medium tracking-wide hover:bg-zinc-50 transition-colors"
+                      onClick={() => setSortBy(opt)}
+                    >
+                      {opt}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -297,7 +315,9 @@ const Shop: React.FC = () => {
                 onFilterChange={setFilters}
                 availableFilters={{
                   categories: CATEGORIES.filter((c) => c !== "All"),
-                  subcategories: availableSubcategories.filter((s) => s !== "All"),
+                  subcategories: availableSubcategories.filter(
+                    (s) => s !== "All"
+                  ),
                   brands: BRANDS.filter((b) => b !== "All Brands"),
                   sizes: availableSizes,
                   priceRanges: PRICE_RANGES,

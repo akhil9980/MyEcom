@@ -18,9 +18,9 @@ const ScrollStory: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className="relative bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-500 text-zinc-900 py-32"
+      className="relative bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-500 text-zinc-900 py-32 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[120px] before:bg-gradient-to-b before:from-transparent before:to-amber-400 before:z-10 before:pointer-events-none"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-20">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Sticky Left Text Column */}
           <div className="lg:sticky lg:top-32 h-fit">

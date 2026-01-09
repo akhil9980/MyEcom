@@ -10,7 +10,9 @@ import { PRODUCTS } from "../data/products";
 
 const Home: React.FC = () => {
   // Show featured products - mix of new and sale items
-  const featuredProducts = PRODUCTS.filter((p) => p.isNew || p.originalPrice).slice(0, 8);
+  const featuredProducts = PRODUCTS.filter(
+    (p) => p.isNew || p.originalPrice
+  ).slice(0, 8);
   const newArrivals = PRODUCTS.filter((p) => p.isNew).slice(0, 4);
   const onSale = PRODUCTS.filter((p) => p.originalPrice).slice(0, 4);
 
@@ -363,7 +365,7 @@ const Home: React.FC = () => {
                 transition={{ delay: 0.3, duration: 0.6 }}
                 viewport={{ once: true }}
                 className="text-4xl md:text-5xl font-serif mb-6"
-                >
+              >
                 Join the SnappBuy Circle
               </motion.h2>
               <motion.p
