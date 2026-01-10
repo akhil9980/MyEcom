@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const PageLoader: React.FC = () => {
+interface PageLoaderProps {
+  onLoadingComplete?: () => void;
+}
+
+const PageLoader: React.FC<PageLoaderProps> = ({ onLoadingComplete }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Simulate initial page load
     const timer = setTimeout(() => {
       setIsLoading(false);
+      // Notify parent component that loading is complete
+      if (onLoadingComplete) {
+        onLoadingComplete();
+      }
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [onLoadingComplete]);
 
   return (
     <AnimatePresence>

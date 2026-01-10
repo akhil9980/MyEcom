@@ -8,7 +8,11 @@ import ProductCard from "../components/ProductCard";
 import CustomCursor from "../components/CustomCursor";
 import { PRODUCTS } from "../data/products";
 
-const Home: React.FC = () => {
+interface HomeProps {
+  loadingComplete?: boolean;
+}
+
+const Home: React.FC<HomeProps> = ({ loadingComplete = false }) => {
   // Show featured products - mix of new and sale items
   const featuredProducts = PRODUCTS.filter(
     (p) => p.isNew || p.originalPrice
@@ -22,9 +26,14 @@ const Home: React.FC = () => {
   // Smooth scroll behavior and trigger animations
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Force re-render to trigger animations
-    setAnimationKey((prev) => prev + 1);
   }, []);
+
+  // Trigger animations after loading completes
+  useEffect(() => {
+    if (loadingComplete) {
+      setAnimationKey((prev) => prev + 1);
+    }
+  }, [loadingComplete]);
 
   return (
     <>

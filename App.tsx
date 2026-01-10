@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import PageLoader from "./components/PageLoader";
@@ -122,9 +122,11 @@ const Footer: React.FC = () => (
 );
 
 const App: React.FC = () => {
+  const [loadingComplete, setLoadingComplete] = useState(false);
+
   return (
     <CartProvider>
-      <PageLoader />
+      <PageLoader onLoadingComplete={() => setLoadingComplete(true)} />
       <Router>
         <Routes>
           <Route
@@ -133,7 +135,7 @@ const App: React.FC = () => {
               <div className="min-h-screen flex flex-col">
                 <Navbar />
                 <main className="flex-grow">
-                  <Home />
+                  <Home loadingComplete={loadingComplete} />
                 </main>
                 <Footer />
               </div>
