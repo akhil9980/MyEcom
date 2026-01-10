@@ -16,9 +16,14 @@ const Home: React.FC = () => {
   const newArrivals = PRODUCTS.filter((p) => p.isNew).slice(0, 4);
   const onSale = PRODUCTS.filter((p) => p.originalPrice).slice(0, 4);
 
-  // Smooth scroll behavior
+  // Force animations on mount
+  const [animationKey, setAnimationKey] = React.useState(0);
+
+  // Smooth scroll behavior and trigger animations
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Force re-render to trigger animations
+    setAnimationKey((prev) => prev + 1);
   }, []);
 
   return (
@@ -28,7 +33,7 @@ const Home: React.FC = () => {
 
       <div className="flex flex-col bg-white">
         {/* Cinematic Hero Section */}
-        <CinematicHero />
+        <CinematicHero key={animationKey} />
 
         {/* Scroll-Based Storytelling Section */}
         <ScrollStory />
